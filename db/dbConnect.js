@@ -1,14 +1,16 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
 
-async function dbConnect() {
-    mongoose.connect(process.env.DB_URL, {
+const mongoose = require('mongoose');
+// require('dotenv').config();
+
+const dbConnect = () => {
+    mongoose.connect('mongodb://localhost:27017/mydatabase', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {
-        console.log('Successfully Connected to Mongo Atlas');
-    }).catch((error) => { // Fix the parentheses here
-        console.log('Cannot Connect to Mongo Atlas');
-        console.log(error);
+        console.log('Connected to the database');
+    }).catch((error) => {
+        console.error('Error connecting to the database:', error);
     });
-}
+};
+
+module.exports = dbConnect;
