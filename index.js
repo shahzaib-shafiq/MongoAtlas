@@ -1,11 +1,11 @@
-const http=require("http");
-const app=require("./app");
-app.set('port',process.env.PORT?? 3000);
-const server =http.createServer(app);
+const http = require("http");
+const app = require("./app");
+const port = process.env.PORT || 3000; // Use default 3000 if PORT is not defined
 
-server.maxConnections('listening',()=>{
-    console.log('Listening on Port ' +(process.env.PORT??3000))
+app.set('port', port);
 
-})
+const server = http.createServer(app);
 
-server.listen(process.env.PORT??3000);
+server.listen(port, () => {
+    console.log('Listening on Port ' + port);
+});
